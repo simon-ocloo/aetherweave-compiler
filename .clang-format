@@ -1,0 +1,29 @@
+BasedOnStyle: LLVM
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: false
+BinPackParameters: false
+BraceWrapping:
+  AfterFunction: true
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterEnum: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  BeforeElse: true
+BreakBeforeBraces: Custom
+ColumnLimit: 120
+ContinuationIndentWidth: 4
+EmptyLineBeforeAccessModifier: LogicalBlock
+IncludeBlocks: Preserve
+IndentWidth: 4
+InsertBraces: true
+MaxEmptyLinesToKeep: 2
+PenaltyReturnTypeOnItsOwnLine: 10000
+PointerAlignment: Left
+SortIncludes: CaseInsensitive
