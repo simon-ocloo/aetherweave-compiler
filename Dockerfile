@@ -5,6 +5,9 @@ RUN apt-get update \
     && apt-get install -y \
        clang-20 \
        cmake \
+       libmlir-20-dev \
+       llvm-20-dev \
+       mlir-20-tools \
        ninja-build \
     && rm -rf /var/lib/apt/lists/*
 

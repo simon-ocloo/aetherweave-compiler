@@ -1,0 +1,6 @@
+set(LLVM_TARGET_DEFINITIONS AetherDialect.td)
+mlir_tablegen(AetherDialect.h.inc -gen-dialect-decls -dialect aether)
+mlir_tablegen(AetherDialect.cpp.inc -gen-dialect-defs -dialect aether)
+mlir_tablegen(AetherOps.h.inc -gen-op-decls)
+mlir_tablegen(AetherOps.cpp.inc -gen-op-defs)
+add_public_tablegen_target(AetherDialectIncGen)
