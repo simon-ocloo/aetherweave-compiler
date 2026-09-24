@@ -177,7 +177,8 @@ bool import_graph(const onnx::GraphProto& graph, mlir::ModuleOp mlir_module)
 } // namespace
 
 
-mlir::OwningOpRef<mlir::ModuleOp> ONNXMLIRImporter::run(mlir::MLIRContext& context, const std::filesystem::path& path) const
+mlir::OwningOpRef<mlir::ModuleOp> ONNXMLIRImporter::run(mlir::MLIRContext&           context,
+                                                        const std::filesystem::path& path) const
 {
     auto model = load_model(path);
     if (model.has_value() == false) {

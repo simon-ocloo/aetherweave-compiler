@@ -15,7 +15,9 @@ namespace aetherweave {
 class AddOpEmitter : public OpEmitter {
   protected:
     bool is_supported_node(std::string_view op_type) const override;
-    bool run(const onnx::NodeProto& node, mlir::OpBuilder& builder, llvm::StringMap<mlir::Value>& value_map) const override;
+    bool run(const onnx::NodeProto&        node,
+             mlir::OpBuilder&              builder,
+             llvm::StringMap<mlir::Value>& value_map) const override;
 };
 
 } // namespace aetherweave

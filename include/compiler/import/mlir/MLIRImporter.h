@@ -17,7 +17,8 @@ class MLIRImporter {
 
   protected:
     virtual bool                              is_supported_extension(const std::filesystem::path& extension) const = 0;
-    virtual mlir::OwningOpRef<mlir::ModuleOp> run(mlir::MLIRContext& context, const std::filesystem::path& path) const = 0;
+    virtual mlir::OwningOpRef<mlir::ModuleOp> run(mlir::MLIRContext&           context,
+                                                  const std::filesystem::path& path) const = 0;
 };
 
 } // namespace aetherweave

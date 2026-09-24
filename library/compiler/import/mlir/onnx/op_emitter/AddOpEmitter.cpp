@@ -20,7 +20,9 @@ bool AddOpEmitter::is_supported_node(std::string_view op_type) const
 }
 
 
-bool AddOpEmitter::run(const onnx::NodeProto& node, mlir::OpBuilder& builder, llvm::StringMap<mlir::Value>& value_map) const
+bool AddOpEmitter::run(const onnx::NodeProto&        node,
+                       mlir::OpBuilder&              builder,
+                       llvm::StringMap<mlir::Value>& value_map) const
 {
     if (node.input_size() < 2 or node.output_size() < 1) {
         llvm::errs() << "AddOpEmitter: malformed Add node\n";
