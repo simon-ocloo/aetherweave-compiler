@@ -7,6 +7,7 @@ add_mlir_library(AetherWeaveCompiler
   import/mlir/onnx/ONNXMLIRImporter.cpp
   import/mlir/onnx/op_emitter/OpEmitter.cpp
   import/mlir/onnx/op_emitter/AddOpEmitter.cpp
+  orchestrator/Orchestrator.cpp
   pass/conversion/aether_to_linalg/AetherToLinalg.cpp
   pass/conversion/aether_to_linalg/pattern/AddOpPattern.cpp
   DEPENDS
@@ -17,12 +18,35 @@ add_mlir_library(AetherWeaveCompiler
   LINK_LIBS PUBLIC
     AetherDialect
     MLIRArithDialect
+    MLIRArithToLLVM
+    MLIRArithTransforms
+    MLIRBufferizationDialect
+    MLIRBufferizationPipelines
+    MLIRBufferizationTransforms
+    MLIRBuiltinToLLVMIRTranslation
+    MLIRControlFlowDialect
+    MLIRControlFlowToLLVM
     MLIRFuncDialect
+    MLIRFuncToLLVM
     MLIRIR
+    MLIRIndexDialect
+    MLIRIndexToLLVM
+    MLIRLLVMDialect
+    MLIRLLVMToLLVMIRTranslation
     MLIRLinalgDialect
+    MLIRLinalgTransforms
+    MLIRMemRefDialect
+    MLIRMemRefToLLVM
+    MLIRMemRefTransforms
     MLIRPass
+    MLIRReconcileUnrealizedCasts
+    MLIRSCFDialect
+    MLIRSCFToControlFlow
+    MLIRTargetLLVMIRExport
     MLIRTensorDialect
+    MLIRTensorTransforms
     MLIRTransformUtils
+    MLIRTransforms
     ONNX::onnx
     ONNX::onnx_proto
 )
