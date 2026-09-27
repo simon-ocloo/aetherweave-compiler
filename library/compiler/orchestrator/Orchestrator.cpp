@@ -32,6 +32,7 @@
 #include "compiler/import/mlir/MLIRImporter.h"
 #include "compiler/orchestrator/Orchestrator.h"
 #include "compiler/pass/conversion/aether_to_linalg/AetherToLinalg.h"
+#include "compiler/pass/instrumentation/DebugPassInstrumentation.h"
 #include "helper/pass.h"
 
 
@@ -144,19 +145,21 @@ bool Orchestrator::run(const Configuration& configuration)
     if (static_cast<bool>(mlir_module) == false) {
         return false;
     }
-    mlir_module->print(llvm::outs());
+
+    if (configuration.debug_mode == true and configuration.debug_directory_path.has_value() == true) {
+        pass_manager.addInstrumentation(helper::create_pass_instrumentation<DebugPassInstrumentation>(
+            configuration.debug_directory_path.value(), mlir_module->getOperation()));
+    }
 
     if (mlir::failed(pass_manager.run(*mlir_module))) {
         return false;
     }
-    mlir_module->print(llvm::outs());
 
     auto llvm_module = mlir::translateModuleToLLVMIR(*mlir_module, this->llvm_context);
     if (llvm_module == nullptr) {
         llvm::errs() << "Orchestrator: LLVM IR translation failed\n";
         return false;
     }
-    llvm_module->print(llvm::outs(), nullptr);
 
     return true;
 }

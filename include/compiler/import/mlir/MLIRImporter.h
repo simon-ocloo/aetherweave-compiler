@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <string_view>
 
 #include <mlir/IR/BuiltinOps.h>
 #include <mlir/IR/MLIRContext.h>
@@ -13,6 +14,7 @@ class MLIRImporter {
   public:
     static mlir::OwningOpRef<mlir::ModuleOp> from_file(mlir::MLIRContext& context, const std::filesystem::path& path);
 
+    virtual std::string_view get_name() const = 0;
     virtual ~MLIRImporter() = default;
 
   protected:

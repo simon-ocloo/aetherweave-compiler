@@ -10,6 +10,7 @@ add_mlir_library(AetherWeaveCompiler
   orchestrator/Orchestrator.cpp
   pass/conversion/aether_to_linalg/AetherToLinalg.cpp
   pass/conversion/aether_to_linalg/pattern/AddOpPattern.cpp
+  pass/instrumentation/DebugPassInstrumentation.cpp
   DEPENDS
     AetherDialectIncGen
   LINK_COMPONENTS

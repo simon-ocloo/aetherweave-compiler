@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include <optional>
 #include <string>
 
 
@@ -12,9 +13,11 @@ struct Configuration {
         std::string architecture;
     };
 
-    std::filesystem::path import_path;
-    std::filesystem::path export_path;
-    Target                target;
+    bool                                 debug_mode;
+    std::optional<std::filesystem::path> debug_directory_path;
+    std::filesystem::path                import_path;
+    std::filesystem::path                export_path;
+    Target                               target;
 };
 
 } // namespace aetherweave

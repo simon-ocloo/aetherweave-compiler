@@ -11,6 +11,7 @@
 #include <llvm/Support/raw_ostream.h>
 #include <mlir/Dialect/Func/IR/FuncOps.h>
 #include <mlir/IR/Builders.h>
+#include <mlir/IR/BuiltinAttributes.h>
 #include <mlir/IR/BuiltinOps.h>
 #include <mlir/IR/BuiltinTypes.h>
 #include <mlir/IR/Location.h>
@@ -24,6 +25,12 @@
 
 
 namespace aetherweave {
+
+std::string_view ONNXMLIRImporter::get_name() const
+{
+    return "ONNXMLIRImporter";
+}
+
 
 bool ONNXMLIRImporter::is_supported_extension(const std::filesystem::path& extension) const
 {
@@ -189,6 +196,7 @@ mlir::OwningOpRef<mlir::ModuleOp> ONNXMLIRImporter::run(mlir::MLIRContext&      
     if (import_graph(model->graph(), mlir_module) == false) {
         return {};
     }
+    mlir_module->setAttr("debug.origin", mlir::StringAttr::get(&context, this->get_name()));
     return mlir_module;
 }
 

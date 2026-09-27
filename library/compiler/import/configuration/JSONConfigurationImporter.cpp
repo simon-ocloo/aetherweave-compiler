@@ -63,6 +63,17 @@ std::optional<Configuration::Target> parse_target(const llvm::json::Object& root
 
 std::optional<Configuration> parse_configuration(const llvm::json::Object& root)
 {
+    auto debug_mode = root.getBoolean("debug_mode").value_or(false);
+    auto debug_directory_path = root.getString("debug_directory_path");
+    if (debug_directory_path.has_value() == true and debug_directory_path.value().empty() == true) {
+        llvm::errs() << "JSONConfigurationImporter: 'debug_directory_path' must not be empty\n";
+        return std::nullopt;
+    }
+    if (debug_mode == true and debug_directory_path.has_value() == false) {
+        llvm::errs() << "JSONConfigurationImporter: 'debug_mode' requires 'debug_directory_path'\n";
+        return std::nullopt;
+    }
+
     auto import_path = root.getString("import_path");
     if (import_path.has_value() == false) {
         llvm::errs() << "JSONConfigurationImporter: missing 'import_path'\n";
@@ -80,8 +91,13 @@ std::optional<Configuration> parse_configuration(const llvm::json::Object& root)
         return std::nullopt;
     }
 
-    return Configuration{
-        .import_path = import_path->str(), .export_path = export_path->str(), .target = target.value()};
+    return Configuration{.debug_mode = debug_mode,
+                         .debug_directory_path = debug_directory_path.has_value()
+                                                     ? std::make_optional(debug_directory_path->str())
+                                                     : std::nullopt,
+                         .import_path = import_path->str(),
+                         .export_path = export_path->str(),
+                         .target = target.value()};
 }
 
 } // namespace
